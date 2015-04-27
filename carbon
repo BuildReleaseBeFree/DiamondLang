@@ -45,6 +45,195 @@ as ()
     eval \"'${STORE_INvar}=${!STORE_INvar%x}'\"
 }
 
+as ()
+{
+    local STORE_INvar="${1}" ; shift
+	# IFS='' read -d '' "${STORE_INvar}" <<<"$( $@ ; echo -n x )"
+	IFS='' read -d '' "${STORE_INvar}" <<<"$( $@ ; echo -n x )"
+    eval \"'${STORE_INvar}=${!STORE_INvar%x}'\"
+}
+
+as ()
+{
+    local STORE_INvar="${1}" ; shift
+	local BUFFER="$( "$@" ; printf %s x ; )"
+	# IFS='' read -d '' "${STORE_INvar}" <<<"$( $@ ; echo -n x )"
+	#"${STORE_INvar}" <<<"$( $@ ; echo -n x )"
+    #eval \"'${STORE_INvar}=${!STORE_INvar%x}'\"
+    printf -v "${STORE_INvar}" %s "${BUFFER%x}"
+}
+
+as ()
+{
+    local STORE_INvar="${1}" ; shift
+	local BUFFER="$( "$@" ; printf %s x ; )"
+    printf -v "${STORE_INvar}" %s "${BUFFER%x}"
+}
+
+as ()
+{
+    local VARIABLEptr="${1}" ; shift
+	printf -v "${VARIABLEptr}" %s "$( "$@" ; printf %s x ; )"
+    printf -v "${VARIABLEptr}" %s "${!VARIABLEptr%x}"
+}
+
+into ()
+{
+    local STORE_INvar="${1}" ; shift
+    # local BUFFERstr=$( cat ; echo -n x )
+    # BUFFERstr=${BUFFERstr%x}
+#	myVar=$(cat; echo -n x)
+#	myVar=${myVar%x}
+#	printf %s "$myVar"
+
+# var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
+	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
+	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
+	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
+#	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
+	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
+	#eval "${STORE_INvar}"='\$\( cat \)'
+	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
+	# eval "$var='$val'"
+	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
+}
+
+storeIn ()
+{
+    local STORE_INvar="${1}" ; shift
+	eval ${STORE_INvar}="$( "$@" 2>&1 )"
+}
+
+filter ()
+{
+	grep -v "$@" ;
+}
+
+count ()
+{
+    case "${1}" in
+        lines )
+			wc -l
+			;;
+        words )
+            wc -w
+			;;
+        characters | chars | bytes )
+			wc -c
+            ;;
+        * )
+			echoError "Unknown Option: $@" >2
+			;;
+	esac | awk '{print $1}'
+}
+
+wrap ()
+{
+	column -c ${COLUMNS} | more ;
+}
+
+# Bash Primitive Variable Tests
+testVariable ()
+{
+    # Test that a refrance IS a variable (not type specific, i.e. may be an array)
+    declare -p "${1}" > /dev/null 2>&1 ;
+}
+
+# Bash Primitive Array Tests
+testArray ()
+{
+    # Test that a refrance IS an array	    
+    testVariableArray "${1}"
+}
+
+testVariableArray ()
+{
+	# Test that a refrance IS an array
+	local TO_TESTstr="${1}" ; shift
+	set -- $( declare -p "${TO_TESTstr}" 2> /dev/null )
+	# Declare output we are matching looks like:
+	# declare -a ARR='([0]="a" [1]="b" [2]="c")'
+	[[ "${2}" == -*a* ]] ;
+}
+
+into ()
+{
+    local STORE_INvar="${1}" ; shift
+    # local BUFFERstr=$( cat ; echo -n x )
+    # BUFFERstr=${BUFFERstr%x}
+#	myVar=$(cat; echo -n x)
+#	myVar=${myVar%x}
+#	printf %s "$myVar"
+
+# var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
+	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
+	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
+	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
+#	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
+	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
+	#eval "${STORE_INvar}"='\$\( cat \)'
+	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
+	# eval "$var='$val'"
+	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
+}
+
+storeIn ()
+{
+    local STORE_INvar="${1}" ; shift
+	eval ${STORE_INvar}="$( "$@" 2>&1 )"
+}
+
+filter ()
+{
+	grep -v "$@" ;
+}
+
+count ()
+{
+    case "${1}" in
+        lines )
+			wc -l
+			;;
+        words )
+            wc -w
+			;;
+        characters | chars | bytes )
+			wc -c
+            ;;
+        * )
+			echoError "Unknown Option: $@" >2
+			;;
+	esac | awk '{print $1}'
+}
+
+wrap ()
+{
+	column -c ${COLUMNS} | more ;
+}
+
+# Bash Primitive Variable Tests
+testVariable ()
+{
+    # Test that a refrance IS a variable (not type specific, i.e. may be an array)
+    declare -p "${1}" > /dev/null 2>&1 ;
+}
+
+# Bash Primitive Array Tests
+testArray ()
+{
+    # Test that a refrance IS an array	    
+    testVariableArray "${1}"
+}
+
+testVariableArray ()
+{
+	# Test that a refrance IS an array
+	local TO_TESTstr="${1}" ; shift
+	set -- $( declare -p "${TO_TESTstr}" 2> /dev/null )
+	# Declare output we are matching looks like:
+	# declare -a ARR='([0]="a" [1]="b" [2]="c")'
+	[[ "${2}" == -*a* ]] ;
+}
 
 into ()
 {
