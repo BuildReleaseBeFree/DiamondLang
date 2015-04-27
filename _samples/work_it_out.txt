@@ -1,0 +1,71 @@
+
+The Ones:
+=========
+testVariableAvailiable	Entity
+testVariableDefined		Entity
+testVariableEmpty		Entity's Value
+testVariableSet			Entity's Value
+
+
+testVariableAssigned
+testVariableContents	
+testVariableDefined		*
+testVariableEmpty
+testVariableExists
+testVariableNull		
+testVariableSet
+testVariableUnassigned
+testVariableUndefined	*
+testVariableUnknown
+testVariableUnset		*
+testVariableValue		*
+testVariableValueless	*
+
+testVariableEmpty
+testVariableSet
+testVariableUnset
+testVariableValue
+
+testVariableSet		testVariableDefined		
+testVariableUnset	testVariableUndefined
+testVariableEmpty	testVariableValue		
+testVariableValue	testVariableValueless	
+
+testVariableAssigned
+testVariableUnassigned
+
+testVariableExists
+testVariableUnknown
+
+Entity Definition:
+==================
+testVariableAvailiable
+testVariableAssigned
+testVariableDefined	(or)	
+
+Value Assignment:
+=================
+testVariableNull
+testVariableValue
+
+testVariableEmpty
+testVariableValue
+
+testVariableEmpty
+testVariableFull
+
+testVariableSet		
+testVariableUnset	
+
+testVariableDefined		
+testVariableUndefined
+
+testVariableValue		
+testVariableValueless	
+
+
+
+Aquired
+Desired
+
+

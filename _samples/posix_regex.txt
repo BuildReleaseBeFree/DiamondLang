@@ -1,0 +1,727 @@
+<html>
+<!-- source: http://www.softpanorama.org/Scripting/Regexorama/posix_regular_expressions.shtml -->
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>POSIX regular Expressions</title>
+<link rel="stylesheet" type="text/css" href="../../CSS/main.css">
+</head>
+
+<body>
+
+<basefont face="Times" size="3">
+<table border="0" width="100%" id="table1" height="135">
+<tr>
+<td rowspan="2" width="40%">
+
+<p align="center"><font face="Bernard MT Condensed" color="#FF0000" size="7">
+<a target="_blank" href="http://www.softpanorama.org/index.shtml"><font color="#FF0000">Softpanorama</font></a></font><b><br>
+</b><i><b><font size="2">May the source be with you, but remember the KISS principle ;-)</font></b></i></p>
+</td>
+<td colspan="6" align="center" valign="bottom">
+<form action="http://www.google.com/cse" id="cse-search-box">
+<input type="hidden" name="cx" value="partner-pub-4031247137266443:ye0t3e-czf5" />
+<input type="hidden" name="ie" value="ISO-8859-1" />
+<input type="text" name="q" size="60" /> <input type="submit" name="sa" value="Search" />
+<img src="http://www.google.com/images/poweredby_transparent/poweredby_999999.gif" alt="Google" />
+</form>
+</td>
+</tr>
+<tr>
+<td bgcolor="#F5F5F5" align="center" width="9%"><b><a href="/switchboard.shtml">Contents</a></b></td>
+<td bgcolor="#F5F5F5" align="center" width="7%"><b>
+<a href="/bulletin.shtml">Bulletin</a></b></td>
+<td bgcolor="#F5F5F5" align="center" width="16%"><b><font size="2">
+<a href="/scriptorama.shtml">Scripting in shell and Perl</a></font></b></td>
+<td bgcolor="#F5F5F5" align="center" width="10%"><b><font size="2">
+<a href="/netorama.shtml">Network troubleshooting</a></font></b></td>
+<td bgcolor="#F5F5F5" align="center" width="7%"><b><a href="/History/index.shtml">History</a></b></td>
+<td bgcolor="#F5F5F5" align="center" width="7%"><b><a href="/Bulletin/Humor/index.shtml">Humor</a></b></td>
+</tr>
+</table>
+
+<center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- top_large_banner -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:90px"
+     data-ad-client="ca-pub-4031247137266443"
+     data-ad-slot="9138796897"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ </center>
+<hr width="100%" noshade size="5" color="#FF0000">
+
+
+<h1>POSIX regular Expressions</h1>
+
+<table border="1" width="100%">
+	<tr>
+		<td width="12%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><a href="#News">News</a></p>
+		</td>
+		<td width="16%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><b><a target="_blank" href="../../Bookshelf/regex.shtml">Recommended 
+		Books</a></b></p>
+		</td>
+		<td width="15%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><b>
+		<a target="_blank" href="perl_regex_overview.shtml">Overview 
+		of Perl Regular expressions</a></b></p>
+		</td>
+		<td width="15%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><a href="#Recommended_Links">Recommended 
+		Links</a></p>
+		</td>
+		<td width="11%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><b>
+		<a href="#Reference">Reference</a></b></p>
+		</td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+
+		<p align="center"><b>
+		<a href="#Books">Book chapters</a></b></p>
+		</td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+		<b>
+		<a href="#Tutorials">Tutorials</a></b></td>
+	</tr>
+	<tr>
+		<td width="9%" bgcolor="#FFFFCC" align="center"><b><a href="../Perlbook/Ch05/index.shtml">Perl Regular Expressions</a></b></td>
+		<td width="8%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../Perlbook/Ch05/regex_overview.shtml">
+			Overview of regular expressions in Perl</a></b></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../Perlbook/Ch05/more_complex_regex.shtml">
+			More Complex Perl Regular Expressions</a></b></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../Perlbook/Ch05/nongreedy_matching.shtml">
+			Greedy and Non-Greedy Matches</a></b></td>
+		<td width="11%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../Perlbook/Ch05/split_function.shtml">Perl 
+			Split function</a></b></td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+		<b><a href="../Perlbook/Ch05/best_practices.shtml">
+			Regular Expressions Best Practices</a></b></td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+		<b>
+			<a href="../Perlbook/Ch05/html_matching_examples.shtml">
+			Typical Examples of Using the Match Operator</a></b></td>
+	</tr>
+	<tr>
+		<td width="9%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../../Tools/Grep/grep_regular_expressions.shtml">GNU grep regular 
+		expressions</a></b></td>
+		<td width="8%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../../Tools/Find/finding_files_using_file_name_or_path.shtml">Find 
+		regular expressions</a></b></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../../Tools/Awk/awk_regular_expressions.shtml">AWK Regular 
+		Expression</a></b></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../../Editors/Vimorama/vim_regular_expressions.shtml">Vim Regular 
+		Expressions</a></b></td>
+		<td width="11%" bgcolor="#FFFFCC" align="center"><b>
+		<a href="../../Office/Frontpage/regular_expressions.shtml">Microsoft Frontpage 
+		regex</a></b></td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+		<a target="_blank" href="../../Algorithms/index.shtml">Algorithms</a></td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">
+		<a target="_blank" href="../../Algorithms/compilers.shtml">Compilers</a></td>
+	</tr>
+	<tr>
+		<td width="9%" bgcolor="#FFFFCC" align="center">
+		<b><a href="../Javascript/javascript_regular_expressions.shtml">
+	Javascript Regular Expressions</a></b></td>
+		<td width="8%" bgcolor="#FFFFCC" align="center">
+		<b>
+		<a href="../../Admin/HP_operations_manager/Policies/Conditions/patterns.shtml">
+		Patterns in HP OMU</a></b></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center">
+		<a href="#Problems">Problems</a></td>
+		<td width="15%" bgcolor="#FFFFCC" align="center"><b>
+		<a target="_blank" href="../../Mail/spam.shtml">Spam filtering</a></b></td>
+		<td width="11%" bgcolor="#FFFFCC" align="center">
+		<a href="tips.shtml">Tips</a></td>
+		<td width="7%" bgcolor="#FFFFCC" align="center">Humor</td>
+		<td width="7%" bgcolor="#FFFFCC" align="center"><a href="#Etc">Etc</a></td>
+	</tr>
+</table>
+<div align="left">
+<table border="0" width="178" height="620" align="right" cellspacing="4" bgcolor="#FFFFFF">
+<tr><td>
+<table border="1" width="174" height="616" align="center" bgcolor="#FF0000">
+<tr><td>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Upper skyscaper -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:160px;height:600px"
+     data-ad-client="ca-pub-4031247137266443"
+     data-ad-slot="0371843916"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</td></tr></table>
+</td></tr></table>
+</div>
+
+<!---google box ------->
+<table border="0" width="310" align="left" cellspacing="7" cellpadding="4">
+<tr><td width="340" bgcolor="#FFFF00" valign="center" align="center">
+<center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Top Large Rectangle -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4031247137266443"
+     data-ad-slot="3274064497"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></center>
+</td></tr>
+</table>
+<!---end of google box ------->
+
+<p><a target="_blank" href="http://www.regular-expressions.info/posixbrackets.html">Regex Tutorial - 
+POSIX Bracket Expressions</a></p>
+
+<p>POSIX bracket expressions are a special kind of
+<a target="_top" href="http://www.regular-expressions.info/charclass.html">character classes</a>. POSIX 
+bracket expressions match one character out of a set of characters, just like regular character classes. 
+They use the same syntax with square brackets. A hyphen creates a range, and a caret at the start negates 
+the bracket expression.</p>
+
+<p>One key syntactic difference is that the backslash is NOT a metacharacter in a POSIX bracket expression. 
+So in POSIX, the regular expression <tt>[\d]</tt> matches a <tt>\</tt> or a <tt>d</tt>. To match a
+<tt>]</tt>, put it as the first character after the opening <tt>[</tt> or the negating <tt>^</tt>. To 
+match a <tt>-</tt>, put it right before the closing <tt>]</tt>. To match a <tt>^</tt>, put it before 
+the final literal <tt>-</tt> or the closing <tt>]</tt>. Put together, <tt>[]\d^-]</tt> matches <tt>]</tt>,
+<tt>\</tt>, <tt>d</tt>, <tt>^</tt> or <tt>-</tt>.</p>
+
+<p>The main purpose of the bracket expressions is that they adapt to the user&#39;s or application&#39;s locale. 
+A locale is a collection of rules and settings that describe language and cultural conventions, like 
+sort order, date format, etc. The POSIX standard also defines these locales.</p>
+
+<p>Generally, only <a target="_top" href="http://www.regular-expressions.info/posix.html">POSIX-compliant 
+regular expression engines</a> have proper and full support for POSIX bracket expressions. Some non-POSIX 
+regex engines support POSIX character classes, but usually don&#39;t support collating sequences and character 
+equivalents. Regular expression engines that support
+<a target="_top" href="http://www.regular-expressions.info/unicode.html">Unicode</a> use Unicode properties 
+and scripts to provide functionality similar to POSIX bracket expressions. In Unicode regex engines,
+<a target="_blank" href="http://www.regular-expressions.info/charclass.html#shorthand">shorthand character 
+classes</a> like <tt>\w</tt> normally match all relevant Unicode characters, alleviating the need to 
+use locales.</p>
+
+<h2>Character Classes</h2>
+
+<p>Don&#39;t confuse the POSIX term &quot;character class&quot; with what is normally called a
+<a target="_top" href="http://www.regular-expressions.info/charclass.html">regular expression character 
+class</a>. <tt>[x-z0-9]</tt> is an example of what we call a &quot;character class&quot; and POSIX calls a &quot;bracket 
+expression&quot;. <tt>[:digit:]</tt> is a POSIX character class, used inside a bracket expression like
+<tt>[x-z[:digit:]]</tt>. These two regular expressions match exactly the same: a single character that 
+is either <tt>x</tt>, <tt>y</tt>, <tt>z</tt> or a digit. The class names must be written all lowercase.</p>
+
+<p>POSIX bracket expressions can be negated. <tt>[^x-z[:digit:]]</tt> matches a single character that 
+is not x, y, z or a digit. A major difference between POSIX bracket expressions and the character classes 
+in other regex flavors is that POSIX bracket expressions treat the backslash as a literal character. 
+This means you can&#39;t use backslashes to escape the closing bracket (]), the caret (^) and the hyphen 
+(-). To include a caret, place it anywhere except right after the opening bracket. <tt>[x^]</tt> matches 
+an x or a caret. You can put the closing bracket right after the opening bracket, or the negating caret.
+<tt>[]x]</tt> matches a closing bracket or an x. <tt>[^]x]</tt> matches any character that is not a 
+closing bracket or an x. The hyphen can be included right after the opening bracket, or right before 
+the closing bracket, or right after the negating caret. Both <tt>[-x]</tt> and <tt>[x-]</tt> match an 
+x or a hyphen.</p>
+
+<p>Exactly which POSIX character classes are available depends on the POSIX locale. The following are 
+usually supported, often also by regex engines that don&#39;t support POSIX itself. I&#39;ve also indicated 
+equivalent character classes that you can use in ASCII and
+<a target="_top" href="http://www.regular-expressions.info/unicode.html">Unicode</a> regular expressions 
+if the POSIX classes are unavailable. Some classes also have Perl-style
+<a target="_blank" href="http://www.regular-expressions.info/charclass.html#shorthand">shorthand</a> 
+equivalents.</p>
+
+<p><a target="_top" href="http://www.regular-expressions.info/java.html">Java</a> does not support POSIX 
+bracket expressions, but does support POSIX character classes using the <tt>\p</tt> operator. Though 
+the <tt>\p</tt> syntax is borrowed from the syntax for
+<a target="_top" href="http://www.regular-expressions.info/unicode.html">Unicode properties</a>, the 
+POSIX classes in Java only match ASCII characters as indicated below. The class names are case sensitive. 
+Unlike the POSIX syntax which can only be used inside a bracket expression, Java&#39;s <tt>\p</tt> can be 
+used inside and outside bracket expressions.</p>
+
+<table border="1" cellspacing="0" cellpadding="4" id="table2">
+	<tr>
+		<th>POSIX</th>
+		<th>Description</th>
+		<th>ASCII</th>
+		<th>Unicode</th>
+		<th>Shorthand</th>
+		<th>Java</th>
+	</tr>
+	<tr>
+		<td><tt>[:alnum:]</tt></td>
+		<td>Alphanumeric characters</td>
+		<td><tt>[a-zA-Z0-9]</tt></td>
+		<td><tt>[\p{L&amp;}\p{Nd}]</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Alnum}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:alpha:]</tt></td>
+		<td>Alphabetic characters</td>
+		<td><tt>[a-zA-Z]</tt></td>
+		<td><tt>\p{L&amp;}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Alpha}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:ascii:]</tt></td>
+		<td>ASCII characters</td>
+		<td><tt>[\x00-\x7F]</tt></td>
+		<td><tt>\p{InBasicLatin}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{ASCII}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:blank:]</tt></td>
+		<td>Space and tab</td>
+		<td><tt>[ \t]</tt></td>
+		<td><tt>[\p{Zs}\t]</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Blank}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:cntrl:]</tt></td>
+		<td>Control characters</td>
+		<td><tt>[\x00-\x1F\x7F]</tt></td>
+		<td><tt>\p{Cc}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Cntrl}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:digit:]</tt></td>
+		<td>Digits</td>
+		<td><tt>[0-9]</tt></td>
+		<td><tt>\p{Nd}</tt></td>
+		<td><tt>\d</tt></td>
+		<td><tt>\p{Digit}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:graph:]</tt></td>
+		<td>Visible characters (i.e. anything except spaces, control characters, etc.)</td>
+		<td><tt>[\x21-\x7E]</tt></td>
+		<td><tt>[^\p{Z}\p{C}]</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Graph}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:lower:]</tt></td>
+		<td>Lowercase letters</td>
+		<td><tt>[a-z]</tt></td>
+		<td><tt>\p{Ll}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Lower}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:print:]</tt></td>
+		<td>Visible characters and spaces (i.e. anything except control characters, etc.)</td>
+		<td><tt>[\x20-\x7E]</tt></td>
+		<td><tt>\P{C}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Print}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:punct:]</tt></td>
+		<td>Punctuation and symbols.</td>
+		<td><tt>[!&quot;#$%&amp;&#39;()*+,\-./:;&lt;=&gt;?@[\\\]^_`{|}~]</tt></td>
+		<td><tt>[\p{P}\p{S}]</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Punct}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:space:]</tt></td>
+		<td>All whitespace characters, including line breaks</td>
+		<td><tt>[ \t\r\n\v\f]</tt></td>
+		<td><tt>[\p{Z}\t\r\n\v\f]</tt></td>
+		<td><tt>\s</tt></td>
+		<td><tt>\p{Space}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:upper:]</tt></td>
+		<td>Uppercase letters</td>
+		<td><tt>[A-Z]</tt></td>
+		<td><tt>\p{Lu}</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{Upper}</tt></td>
+	</tr>
+	<tr>
+		<td><tt>[:word:]</tt></td>
+		<td>Word characters (letters, numbers and underscores)</td>
+		<td><tt>[A-Za-z0-9_]</tt></td>
+		<td><tt>[\p{L}\p{N}\p{Pc}]</tt></td>
+		<td><tt>\w</tt></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td><tt>[:xdigit:]</tt></td>
+		<td>Hexadecimal digits</td>
+		<td><tt>[A-Fa-f0-9]</tt></td>
+		<td><tt>[A-Fa-f0-9]</tt></td>
+		<td>&nbsp;</td>
+		<td><tt>\p{XDigit}</tt></td>
+	</tr>
+</table>
+
+<h2>Collating Sequences</h2>
+
+<p>A POSIX locale can have collating sequences to describe how certain characters or groups of characters 
+should be ordered. E.g. in Spanish, <tt>ll</tt> like in <tt>tortilla</tt> is treated as one character, 
+and is ordered between <tt>l</tt> and <tt>m</tt> in the alphabet. You can use the collating sequence 
+element <tt>[.span-ll.]</tt> inside a bracket expression to match <tt>ll</tt>. E.g. the regex <tt>torti[[.span-ll.]]a</tt> 
+matches <tt>tortilla</tt>. Notice the double square brackets. One pair for the bracket expression, and 
+one pair for the collating sequence.</p>
+
+<p>I do not know of any regular expression engine that support collating sequences, other than POSIX-compliant 
+engines part of a POSIX-compliant system.</p>
+
+<p>Note that a fully POSIX-compliant regex engine will treat <tt>ll</tt> as a single character when 
+the locale is set to Spanish. This means that <tt>torti[^x]a</tt> also matches <tt>tortilla</tt>.
+<tt>[^x]</tt> matches a single character that is not an <tt>x</tt>, which includes <tt>ll</tt> in the 
+Spanish POSIX locale.</p>
+
+<p>In any other regular expression engine, or in a POSIX engine not using the Spanish locale, <tt>torti[^x]a</tt> 
+will match the misspelled word <tt>tortila</tt> but will not match <tt>tortilla</tt>, as <tt>[^x]</tt> 
+cannot match the two characters <tt>ll</tt>.</p>
+
+<p>Finally, note that not all regex engines claiming to implement POSIX regular expressions actually 
+have full support for collating sequences. Sometimes, these engines use the regular expression syntax 
+defined by POSIX, but don&#39;t have full locale support. You may want to try the above matches to see if 
+the engine you&#39;re using does. E.g.
+<a target="_top" href="http://www.regular-expressions.info/tcl.html">Tcl&#39;s regexp command</a> supports 
+collating sequences, but Tcl only supports the Unicode locale, which does not define any collating sequences. 
+The result is that in Tcl, a collating sequence specifying a single character will match just that character, 
+and all other collating sequences will result in an error.</p>
+
+<h2>Character Equivalents</h2>
+
+<p>A POSIX locale can define character equivalents that indicate that certain characters should be considered 
+as identical for sorting. E.g. in French, accents are ignored when ordering words. <tt>élève</tt> comes 
+before <tt>être</tt> which comes before <tt>événement</tt>. <tt>é</tt> and <tt>ê</tt> are all the same 
+as <tt>e</tt>, but <tt>l</tt> comes before <tt>t</tt> which comes before <tt>v</tt>. With the locale 
+set to French, a POSIX-compliant regular expression engine will match <tt>e</tt>, <tt>é</tt>, <tt>è</tt> 
+and <tt>ê</tt> when you use the collating sequence <tt>[=e=]</tt> in the bracket expression <tt>[[=e=]]</tt>.</p>
+
+<p>If a character does not have any equivalents, the character equivalence token simply reverts to the 
+character itself. E.g. <tt>[[=x=][=z=]]</tt> is the same as <tt>[xz]</tt> in the French locale.</p>
+
+<p>Like collating sequences, POSIX character equivalents are not available in any regex engine that 
+I know of, other than those following the POSIX standard. And those that do may not have the necessary 
+POSIX locale support. Here too <a target="_top" href="http://www.regular-expressions.info/tcl.html">
+Tcl&#39;s regexp command</a> supports character equivalents, but Unicode locale, the only one Tcl supports, 
+does not define any character equivalents. This effectively means that <tt>[[=x=]]</tt> and <tt>[x]</tt> 
+are exactly the same in Tcl, and will only match <tt>x</tt>, for any character you may try instead of 
+&quot;x&quot;.&nbsp; </p>
+
+<h2><a name="Recommended_Links">Recommended Links</a></h2>
+<table border="0" width="100%" height="110">
+<tr>
+<td width="100%" align="center">	
+
+<h3><a href="/topvisited_history.shtml">Softpanorama Top Visited</a></h3>
+<iframe src="/topvisited.shtml" width="100%" height="330"><p>Your browser does not support iframes.</p>
+</iframe>
+</td>
+</table>
+<h3>Softpanorama Recommended</h3>
+
+
+<p><a target="_blank" href="http://www.zytrax.com/tech/web/regex.htm">Regular Expressions - a Simple 
+User Guide and Tutorial</a></p>
+
+<p><a target="_blank" href="http://php.net/manual/en/ref.regex.php">PHP POSIX Regex Functions - Manual</a></p>
+<hr>
+<hr noshade color="#FF0000" size="5"><center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4031247137266443";
+/* upper */
+google_ad_slot = "4815841291";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+<hr noshade color="#FF0000" size="5">
+
+<h2><a name="Etc">Etc</a></h2>
+
+<p>FAIR USE NOTICE This site contains 
+		copyrighted material the use of which has not always been specifically 
+		authorized by the copyright owner. We are making such material available 
+		in our efforts to advance understanding of environmental, political, 
+		human rights, economic, democracy, scientific, and social justice 
+		issues, etc. We believe this constitutes a 'fair use' of any such 
+		copyrighted material as provided for in section 107 of the US Copyright 
+		Law. In accordance with Title 17 U.S.C. Section 107, the material on 
+		this site is distributed without profit exclusivly for research and educational purposes.&nbsp;&nbsp; If you wish to use 
+		copyrighted material from this site for purposes of your own that go 
+		beyond 'fair use', you must obtain permission from the copyright owner.&nbsp; </p>
+
+<p>ABUSE: IPs or network segments from which we detect a stream of probes might be blocked for no 
+less then 90 days. Multiple types of probes increase this period.&nbsp;&nbsp; </p>
+
+<p><b>Society</b></p>
+<blockquote>
+
+<p><b><a href="/Skeptics/groupthink.shtml"><font size="2">Groupthink</font></a><font size="2"> :
+<a href="/Skeptics/Political_skeptic/Two_party_system_as_poliarchy/index.shtml">Two Party System 
+as Polyarchy</a> : 
+<a href="/Skeptics/Financial_skeptic/Casino_capitalism/Corruption_of_regulators/index.shtml">
+Corruption of Regulators</a> :
+<a href="/Social/Bureaucracy/index.shtml">Bureaucracies</a> :
+<a href="/Social/Toxic_managers/Micromanagers/understanding_micromanagers.shtml">Understanding Micromanagers 
+and Control Freaks</a> : <a href="/Social/Toxic_managers/index.shtml">Toxic Managers</a> :&nbsp;&nbsp;
+<a href="/Skeptics/Pseudoscience/harvard_mafia.shtml">Harvard Mafia</a> :
+<a href="/Social/Toxic_managers/Communication/diplomatic_communication.shtml">Diplomatic Communication</a> 
+: <a href="/Social/Toxic_managers/surviving_a_bad_performance_review.shtml">Surviving a Bad Performance 
+Review</a> : <a href="/Skeptics/Financial_skeptic/index.shtml">Insufficient Retirement Funds as 
+Immanent Problem of Neoliberal Regime</a> : <a href="/Skeptics/index.shtml">PseudoScience</a> :
+<a href="/Skeptics/Political_skeptic/index.shtml">Who Rules America</a> :
+<a href="/Skeptics/Political_skeptic/Neoliberalism/index.shtml">Neoliberalism
+</a>&nbsp;: <a href="/Skeptics/Political_skeptic/Elite_theory/iron_law_of_oligarchy.shtml">The Iron 
+Law of Oligarchy</a> : </font><a href="/Skeptics/Political_skeptic/libertarianism.shtml">
+<font size="2">Libertarian Philosophy</font></a></b></p>
+</blockquote>
+
+<p><b>Quotes</b></p>
+<blockquote>
+
+<p><b><font size="2" face="Arial"> 
+<a href="/Skeptics/Quotes/war_and_peace_quotes.shtml">War and Peace</a> </font>
+<font face="Arial"><font size="2">: <a href="/Skeptics/Quotes/financial_quotes.shtml">Skeptical 
+Finance</a></font><font size="2"> : <a href="/Skeptics/Quotes/famous_galbraith_quotes.shtml">John 
+Kenneth Galbraith</a> :<a href="/Skeptics/Quotes/talleyrand_quotes.shtml">Talleyrand</a> :
+<a href="/Skeptics/Quotes/oscar_wilde_quotes.shtml">Oscar Wilde</a> :
+<a href="/Skeptics/Quotes/bismarck_quotes.shtml">Otto Von Bismarck</a> :
+<a href="/Skeptics/Quotes/keynes_quotes.shtml">Keynes</a> :
+<a href="/Skeptics/Quotes/george_carlin.shtml">George Carlin</a> :
+<a href="/Skeptics/skeptical_quotes.shtml">Skeptics</a> :
+<a href="/Skeptics/Quotes/propaganda.shtml">Propaganda</a>&nbsp; : <a href="/SE/quotes.shtml">SE 
+quotes</a> : <a href="/Lang/quotes.shtml">Language Design and Programming Quotes</a> :
+<a href="/Bulletin/quotes.shtml">Random IT-related quotes</a> :&nbsp;
+<a href="/Skeptics/Quotes/somerset_maugham.shtml">Somerset Maugham</a> :
+<a href="/Skeptics/Quotes/marcus_aurelius.shtml">Marcus Aurelius</a> :
+<a href="/Skeptics/Quotes/kurt_vonnegut_quotes.shtml">Kurt Vonnegut</a> :
+<a href="/Skeptics/Quotes/eric_hoffer.shtml">Eric Hoffer</a> :
+<a href="/Skeptics/Quotes/churchill_quotes.shtml">Winston Churchill</a> :
+<a href="/Skeptics/Quotes/napoleon_quotes.shtml">Napoleon Bonaparte</a> :
+<a href="/Skeptics/Quotes/ambrose_bierce.shtml">Ambrose Bierce</a> :&nbsp;
+<a href="/Skeptics/Quotes/bernard_shaw.shtml">Bernard Shaw</a> : </font>
+<a href="/Skeptics/Quotes/mark_twain_quotes.shtml"><font size="2">Mark Twain Quotes</font></a></font></b></p>
+</blockquote>
+
+<p><b>Bulletin:</b></p>
+<blockquote>
+
+<p><b><font face="Arial"><a href="http://softpanorama.biz/Bulletin/Sp2013_v25/bulletin25_12.shtml">
+<font size="2">Vol 25, No.12 (December, 2013) Rational Fools vs. Efficient Crooks The efficient 
+markets hypothesis</font></a><font size="2"> :
+<a href="http://softpanorama.biz/Skeptics/Political_skeptic/Bulletin/political_skeptic2013.shtml">
+Political Skeptic Bulletin, 2013</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Unemployment/Bulletin/unempoyment2010.shtml">
+Unemployment Bulletin, 2010</a> :
+<a href="http://softpanorama.biz/Bulletin/Sp2011_v23/bulletin23_10.shtml">&nbsp;Vol 23, No.10 
+(October, 2011) An observation about corporate security departments</a> :
+<a href="http://softpanorama.biz/Skeptics/Political_skeptic/Fifth_column/Color_revolutions/Euromaydan/Bulletin/euromaydan14_06.shtml">
+Slightly Skeptical Euromaydan Chronicles, June 2014</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Casino_capitalism/12_Apostols_of_deregulation/Greenspan/Bulletin/greenspan_bulletin2008.shtml">
+Greenspan legacy bulletin, 2008</a> :
+<a href="/Bulletin/Sp2013_v25/bulletin25_10.shtml">Vol 25, No.10 (October, 2013) Cryptolocker Trojan 
+(Win32/Crilock.A)</a> :
+<a href="/Bulletin/Sp2013_v25/bulletin25_08.shtml">Vol 25, No.08 (August, 2013) Cloud providers 
+as intelligence collection hubs</a> : 
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2010.shtml">
+Financial Humor Bulletin, 2010</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Inequality/Bulletin/inequality2009.shtml">
+Inequality Bulletin, 2009</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2008.shtml">
+Financial Humor Bulletin, 2008</a> :
+<a href="http://softpanorama.biz/Copyright/Bulletin/copyleft_problems2004.shtml">Copyleft Problems 
+Bulletin, 2004</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2011.shtml">
+Financial Humor Bulletin, 2011</a> :
+<a href="http://softpanorama.biz/Skeptics/Financial_skeptic/Energy/Bulletin/energy_bulletin2010.shtml">
+Energy Bulletin, 2010</a> : <a href="http://softpanorama.biz/Malware/Bulletin/malware2010.shtml">
+Malware Protection Bulletin, 2010</a> : <a href="/Bulletin/Sp2014_v26/bulletin26_01.shtml">Vol 26, 
+No.1 (January, 2013) Object-Oriented Cult</a> :
+<a href="http://softpanorama.biz/Skeptics/Political_skeptic/Bulletin/political_skeptic2011.shtml">
+Political Skeptic Bulletin, 2011</a> :
+<a href="/Bulletin/Sp2011_v23/bulletin23_11.shtml">Vol 23, No.11 (November, 2011) Softpanorama classification 
+of sysadmin horror stories</a> : <a href="/Bulletin/Sp2013_v25/bulletin25_05.shtml">Vol 25, No.05 
+(May, 2013) Corporate bullshit as a communication method</a>&nbsp; : </font><a href="/Bulletin/Sp2013_v25/bulletin25_06.shtml">
+<font size="2">Vol 25, No.06 (June, 2013) A Note on the Relationship of Brooks Law and Conway Law</font></a></font></b></p>
+</blockquote>
+
+<p align="left"><b>History:</b></p>
+<blockquote>
+
+<p><b><font face="Arial"><a href="/History/index.shtml"><font size="2">Fifty glorious years (1950-2000): 
+the triumph of the US computer engineering</font></a><font size="2"> :
+<a href="/People/Knuth/index.shtml">Donald Knuth</a> : <a href="/People/Knuth/taocp.shtml">TAoCP 
+and its Influence of Computer Science</a> : <a href="/People/Stallman/index.shtml">Richard Stallman</a> 
+: <a href="/People/Torvalds/index.shtml">Linus Torvalds</a>&nbsp; :
+<a href="/People/Wall/index.shtml">Larry Wall </a>&nbsp;:
+<a href="/People/Ousterhout/index.shtml">John K. Ousterhout</a> : <a href="/History/ctss.shtml">
+CTSS</a> : <a href="/History/multix.shtml">Multix OS</a> <a href="/History/Unix/index.shtml">Unix 
+History</a> : <a href="/People/Shell_giants/introduction.shtml">Unix shell history</a> :
+<a href="/Editors/Vimorama/history.shtml">VI editor</a> :
+<a href="/Scripting/Piporama/history.shtml">History of pipes concept</a> :
+<a href="/Solaris/solaris_history.shtml">Solaris</a> : <a href="/History/dos_history.shtml">MS DOS</a> 
+:&nbsp; <a href="/History/lang_history.shtml">Programming Languages History</a> :
+<a href="/Lang/pl1.shtml">PL/1</a> : <a href="/Lang/simula67.shtml">Simula 67</a> :
+<a href="/Lang/Cilorama/history.shtml">C</a> :
+<a href="/People/Stallman/history_of_gcc_development.shtml">History of GCC development</a> :&nbsp;
+<a href="/People/Scripting_giants/scripting_languages_as_vhll.shtml">Scripting Languages</a> :
+<a href="/Scripting/Perlbook/Ch01/perl_history.shtml">Perl history&nbsp; </a>&nbsp;:
+<a href="/History/os_history.shtml">OS History</a> : <a href="/Mail/history.shtml">Mail</a> :
+<a href="/DNS/history.shtml">DNS</a> : <a href="/Net/Application_layer/SSH/ssh_history.shtml">SSH</a> 
+: <a href="/History/cpu_history.shtml">CPU Instruction Sets</a> :
+<a href="/Hardware/Sun/history_of_sparc.shtml">SPARC systems 1987-2006</a> :
+<a href="/OFM/Paradigm/Ch03/norton_commander.shtml">Norton Commander</a> :
+<a href="/Windows/Norton_utilities/history.shtml">Norton Utilities</a> :
+<a href="/Windows/Ghosting/ghost_history.shtml">Norton Ghost</a> :
+<a href="/Office/Frontpage/history.shtml">Frontpage history</a> :
+<a href="/Malware/Malware_defense_history/index.shtml">Malware Defense History</a> :
+<a href="/Utilities/Screen/history.shtml">GNU Screen</a> : </font>
+<a href="/OSS/oss_early_history.shtml"><font size="2">OSS early history</font></a></font></b></p>
+</blockquote>
+
+<p><b>Classic books:</b></p>
+<blockquote>
+
+<p><b><font face="Arial"><a href="/Bookshelf/Classic/peter_principle.shtml"><font size="2">The Peter 
+Principle</font></a><font size="2"> : <a href="/Bookshelf/Classic/parkinson_law.shtml">Parkinson 
+Law</a> : <a href="/Bookshelf/Classic/nineteen_eighty_four.shtml">1984</a> :
+<a href="/Bookshelf/Classic/tmmm.shtml">The Mythical Man-Month</a> :&nbsp;
+<a href="/Bookshelf/Classic/polya_htsi.shtml">How to Solve It by George Polya</a> :
+<a href="/Bookshelf/Classic/taocp.shtml">The Art of Computer Programming</a> :
+<a href="/Bookshelf/Classic/teops.shtml">The Elements of Programming Style</a> :
+<a href="/Bookshelf/Classic/unix_haters_handhook.shtml">The Unix Hater’s Handbook</a> :
+<a href="/Bookshelf/Classic/jargon_file.shtml">The Jargon file</a> :
+<a href="/Bookshelf/Classic/true_believer.shtml">The True Believer</a> :
+<a href="/Bookshelf/Classic/programming_pearls.shtml">Programming Pearls</a> :
+<a href="/Bookshelf/Classic/good_soldier_svejk.shtml">The Good Soldier Svejk</a> : </font>
+<a href="/Bookshelf/Classic/power_elite.shtml"><font size="2">The Power Elite</font></a></font></b></p>
+</blockquote>
+
+<p><b>Most popular humor pages:</b></p>
+<blockquote>
+
+<p><font face="Arial"><b><a href="/Bulletin/Humor/Slackerism/it_slacker_manifest.shtml">
+<font size="2">Manifest of the Softpanorama IT Slacker Society</font></a><font size="2"> :
+<a href="/Bulletin/Humor/Slackerism/ten_commandments_of_software_slackerism.shtml">Ten Commandments 
+of the IT Slackers Society</a> : <a href="/Bulletin/Humor/index.shtml">Computer Humor Collection</a> 
+: <a href="/Bulletin/Humor/bsd_logo_story.shtml">BSD Logo Story</a> :
+<a href="/Bulletin/Humor/cuckoo_egg.shtml">The Cuckoo&#39;s Egg </a>:
+<a href="/Bulletin/Humor/slang.shtml">IT Slang</a> : <a href="/Lang/Cpp_rama/humor.shtml">C++ Humor</a> 
+: <a href="/Bulletin/Humor/Archive/humor059.shtml">ARE YOU A BBS ADDICT?</a> :
+<a href="/Bulletin/Humor/Archive/humor092.shtml">The Perl Purity Test</a> :
+<a href="/Bulletin/Humor/Archive/humor065.shtml">Object oriented programmers of all nations</a> 
+: <a href="/Skeptics/Financial_skeptic/Humor/financial_humor.shtml">Financial Humor</a> :
+<a href="/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2008.shtml">Financial Humor Bulletin, 
+2008</a> : <a href="/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2010.shtml">Financial 
+Humor Bulletin, 2010</a> : <a href="/Editors/humor.shtml">The Most Comprehensive Collection of Editor-related 
+Humor</a> : <a href="/Lang/programming_languages_humor.shtml">Programming Language Humor</a> :
+<a href="/Skeptics/Financial_skeptic/Casino_capitalism/Systemic_instability_of_financial_sector/TBTF/Goldman_Sachs/humor.shtml">
+Goldman Sachs related humor</a> :
+<a href="/Skeptics/Financial_skeptic/Casino_capitalism/Twelve_apostles_of_deregulation/Greenspan/greenspan_humor.shtml">
+Greenspan humor</a> : <a href="/Lang/Cilorama/humor.shtml">C Humor</a> :
+<a href="/Scripting/humor.shtml">Scripting Humor</a> :
+<a href="/Bulletin/Humor/real_programmers_humor.shtml">Real Programmers Humor</a> :
+<a href="/WWW/humor.shtml">Web Humor</a> : <a href="/Copyright/humor.shtml">GPL-related Humor</a> 
+: <a href="/OFM/ofm_humor.shtml">OFM Humor</a> :
+<a href="/Skeptics/Political_skeptic/humor.shtml">Politically Incorrect Humor</a> :
+<a href="/Security/IDS/humor.shtml">IDS Humor</a> : <a href="/Bulletin/Humor/linux_sucks.shtml">
+&quot;Linux Sucks&quot; Humor </a>: <a href="/Links/Russian/Culture/Music/russian_musical_humor.shtml">Russian 
+Musical Humor</a> : <a href="/Bulletin/Humor/best_russian_programmer_humor.shtml">Best Russian Programmer 
+Humor</a> : <a href="/Bulletin/Humor/Archive/humor070.shtml">Microsoft plans to buy Catholic Church</a> 
+: <a href="/People/Stallman/rms_related_humor.shtml">Richard Stallman Related Humor</a> :
+<a href="/Admin/humor.shtml">Admin Humor</a> : <a href="/People/Wall/perl_related_humor.shtml">Perl-related 
+Humor</a> : <a href="/People/Torvalds/linus_torvalds_related_humor.shtml">Linus Torvalds Related 
+humor</a> : <a href="/Skeptics/humor.shtml">PseudoScience Related Humor</a> :
+<a href="/Net/net_humor.shtml">Networking Humor</a> :
+<a href="/Scripting/Shellorama/humor.shtml">Shell Humor</a> :
+<a href="/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2011.shtml">Financial Humor Bulletin, 
+2011</a> : <a href="/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2012.shtml">Financial 
+Humor Bulletin, 2012</a> :
+<a href="/Skeptics/Financial_skeptic/Humor/Bulletin/financial_humor2013.shtml">Financial Humor Bulletin, 
+2013</a> : <a href="/Lang/Javarama/humor.shtml">Java Humor</a> : <a href="/SE/humor.shtml">Software 
+Engineering Humor</a> : <a href="/Solaris/humor.shtml">Sun Solaris Related Humor</a> :
+<a href="/Education/humor.shtml">Education Humor</a> : <a href="/Admin/Tivoli/ibm_humor.shtml">IBM 
+Humor</a> : <a href="/Lang/Asmorama/humor.shtml">Assembler-related Humor</a> :
+<a href="/Editors/Vimorama/vim_humor.shtml">VIM Humor</a> : <a href="/Malware/humor.shtml">Computer 
+Viruses Humor</a> : <a href="/Bulletin/Humor/Archive/humor034.shtml">Bright tomorrow is rescheduled 
+to a day after tomorrow</a> : <a href="/Bulletin/Humor/classic_computer_humor.shtml">Classic Computer 
+Humor</a> </font></b></font></p>
+</blockquote>
+
+<p align="left"><b><a href="/Bulletin/Humor/last_but_not_least.shtml">The Last but not Least</a></b></p>
+<hr size="5" noshade color="#FF0000"><font face="Verdana" size="1">
+
+<p><i><b>Copyright © 1996-2015 by Dr. Nikolai Bezroukov</b></i>. <a target="_blank" href>www.softpanorama.org</a> 
+was created as a service to the UN Sustainable Development Networking Programme (<a target="_blank" href="http://www.un.org/Depts/dhl/sflib/">SDNP</a>) 
+in the author free time. This document is an industrial compilation designed and <b>created exclusively 
+for educational use</b> and is distributed under the <a href="/license.shtml">Softpanorama Content License</a>. 
+</p>
+
+<p>The site uses AdSense so you need to be aware of Google privacy policy. You you do not want to be 
+tracked by Google please disable Javascript for this site. <em>This site is perfectly usable without 
+Javascript.</em> </p>
+
+<p>Original materials copyright belong 
+to respective owners. <i><b>Quotes are made<font color="#FF0000"> for educational purposes only</font> 
+in compliance with the fair use doctrine. </b></i></p>
+
+<p><em>FAIR USE NOTICE </em>This site contains 
+		copyrighted material the use of which has not always been specifically 
+		authorized by the copyright owner. We are making such material available 
+		to advance understanding of computer science, IT technology, economic, scientific, and social  
+		issues. We believe this constitutes a 'fair use' of any such 
+		copyrighted material as provided by section 107 of the US Copyright Law according to which 
+such material can be distributed without profit exclusively for research and educational purposes.</p>
+
+<p><b>This is a Spartan WHYFF (We Help You For Free) 
+site written by people for whom English is not a native language.</b> Grammar and spelling errors should 
+be expected. <b>The site contain some broken links as it develops like a living tree...</b></p>
+
+<table border="0" width="100%">
+<tr>
+<td><font face="Verdana" size="1">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</font></td>
+<td><font face="Verdana" size="1">You can use PayPal to make a contribution, supporting development 
+of this site and speed up access. In case softpanorama.org is down currently there are 
+two functional mirrors: softpanorama.info (the fastest) and softpanorama.net.</font></td>
+</tr>
+</table>
+
+<p><b>Disclaimer:</b> </p>
+
+<p><i>The statements, views and opinions presented on this web page are those of the author (or 
+referenced source) and are 
+not endorsed by, nor do they necessarily reflect, the opinions of the author present and former employers, SDNP or any other organization the author may be associated with.</i> <i>We do not warrant the correctness 
+of the information provided or its fitness for any purpose.</i></p>
+</font>
+
+<p><i>Last modified: <!--webbot bot="Timestamp" s-type="EDITED" s-format="%B, %d, %Y" startspan -->December, 03, 2014<!--webbot bot="Timestamp" i-checksum="39343" endspan --> </i></p>
+
+</body>
+
+</html>

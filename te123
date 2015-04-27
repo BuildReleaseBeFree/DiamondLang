@@ -1,0 +1,44 @@
+
+
+total 408
+-rw-r--r--  1 jamesborkowski  staff   1485 21 Apr 22:39 1
+drwxr-xr-x  7 jamesborkowski  staff    238  9 Apr 22:09 _samples
+-rw-r--r--  1 jamesborkowski  staff     19 25 Apr 16:08 a
+-rwxr-xr-x@ 1 jamesborkowski  staff   2471  4 Apr 16:33 alias-base.inc.sh
+-rw-r--r--  1 jamesborkowski  staff   6768 25 Apr 19:39 arguments.inc.sh
+-rwxr-xr-x  1 jamesborkowski  staff   6090 19 Apr 15:56 assert.sh
+-rw-r--r--  1 jamesborkowski  staff     29 25 Apr 16:08 b
+drwxr-xr-x  2 jamesborkowski  staff     68 24 Mar 16:27 bin
+-rwxr-xr-x  1 jamesborkowski  staff  16587 26 Apr 01:16 carbon
+-rw-r--r--@ 1 jamesborkowski  staff   3624 24 Mar 16:27 colours-base.inc.properties
+-rwxr-xr-x@ 1 jamesborkowski  staff   9610 24 Mar 16:27 colours-util.inc.sh
+-rw-r--r--@ 1 jamesborkowski  staff    318 12 Apr 14:20 diamondprofile
+drwxr-xr-x  8 jamesborkowski  staff    272 19 Apr 17:41 downloads
+drwxr-xr-x  3 jamesborkowski  staff    102 19 Apr 14:09 lib
+-rw-r--r--  1 jamesborkowski  staff    148 12 Apr 14:18 log.txt
+-rwxr-xr-x@ 1 jamesborkowski  staff  14534 12 Apr 17:22 objects.inc.sh
+-rw-r--r--  1 jamesborkowski  staff   4589 31 Mar 20:21 osx_tools.sh
+-rw-r--r--  1 jamesborkowski  staff    116 24 Mar 16:27 play.sh
+-rwxr-xr-x@ 1 jamesborkowski  staff   3752 12 Apr 15:05 pre-process.inc.sh
+-rwxr-xr-x  1 jamesborkowski  staff   1373 29 Mar 13:21 scratch.sh
+-rwxr-xr-x  1 jamesborkowski  staff    416 29 Mar 13:12 scratch2.sh
+-rw-r--r--  1 jamesborkowski  staff   1260 22 Apr 21:32 sourceArgTest.inc.sh
+-rw-r--r--  1 jamesborkowski  staff   1668 23 Apr 01:13 sourceArgTestsComplete.inc.sh
+-rw-r--r--  1 jamesborkowski  staff      0 26 Apr 01:16 te123
+drwxr-xr-x  3 jamesborkowski  staff    102 19 Apr 14:12 test
+-rwxr-xr-x  1 jamesborkowski  staff    188 19 Apr 16:22 test.bats
+-rw-r--r--  1 jamesborkowski  staff    146 24 Mar 16:27 test.sh
+-rwxr-xr-x  1 jamesborkowski  staff    353 19 Apr 15:55 testAssert.sh
+-rwxr-xr-x  1 jamesborkowski  staff    188 19 Apr 16:17 testBats.sh
+-rw-r--r--  1 jamesborkowski  staff   2755 16 Apr 12:42 testCase.sh
+-rwxr-xr-x  1 jamesborkowski  staff   6674 25 Apr 23:14 tests-base.inc.sh
+-rwxr-xr-x@ 1 jamesborkowski  staff  13765 25 Apr 23:15 tests-detail.inc.sh
+-rw-r--r--  1 jamesborkowski  staff   2071 26 Apr 00:56 tests-set.inc.sh
+-rw-r--r--@ 1 jamesborkowski  staff   2558  5 Apr 15:27 tests-types-variables.inc.sh
+-rw-r--r--  1 jamesborkowski  staff    187 17 Apr 14:35 url
+-rw-r--r--  1 jamesborkowski  staff    186 17 Apr 15:11 url2
+-rw-r--r--  1 jamesborkowski  staff    186 17 Apr 15:16 url3
+-rw-r--r--  1 jamesborkowski  staff    895 17 Apr 15:28 url4
+-rwxr-xr-x  1 jamesborkowski  staff  11632 26 Apr 01:02 utils-detail.inc.sh
+
+
