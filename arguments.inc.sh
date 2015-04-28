@@ -82,7 +82,7 @@ argument ()
 				;;
 		esac
     done
-    if testVariableEmpty THIS_ARGUMENT_RESULT_VAR
+    if testVariableUnused THIS_ARGUMENT_RESULT_VAR
     then
         echoError "An argument cannot be used without configuring a variable to store the result in."
         echoError "please use the [ -u | -use | --use-var | --use-variable ] flags to configure this!"

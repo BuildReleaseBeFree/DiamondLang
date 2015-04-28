@@ -14,7 +14,7 @@ TEXT_NL=$'\n'
 recordIn ()
 {
     local STORE_INvar="${1}" ; shift
-    printf -v "${STORE_INvar}" '%s' "$( eval \""$@"\" )"
+    printf -v "${STORE_INvar}" '%s' "$( eval "$@" )"
 }
 
 as ()
@@ -29,7 +29,7 @@ as ()
 	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
 	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
 	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
-	eval "${STORE_INvar}"=\"'$( '$@' 2>&1 ; echo -n 'x' ; )'\"
+	eval "${STORE_INvar}"=\"'$( '$@' 2>&1 ; printf %s x ; )'\"
 	echo -n "${!STORE_INvar}" | wc -c
 	${STORE_INvar}='${!STORE_INvar%x}'
 	echo -n "${!STORE_INvar}" | wc -c
@@ -70,10 +70,51 @@ as ()
     printf -v "${STORE_INvar}" %s "${BUFFER%x}"
 }
 
+into ()
+{
+    local STORE_INvar="${1}" ; shift
+    # local BUFFERstr=$( cat ; echo -n x )
+    # BUFFERstr=${BUFFERstr%x}
+#	myVar=$(cat; echo -n x)
+#	myVar=${myVar%x}
+#	printf %s "$myVar"
+
+# var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
+	eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
+#	eval "${STORE_INvar}='$( "$@" 2>&1 )'"
+	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
+#	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
+	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
+	#eval "${STORE_INvar}"='\$\( cat \)'
+#	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
+	# eval "$var='$val'"
+	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
+}
+
+asEval ()
+{
+    local STORE_INvar="${1}" ; shift
+	eval "${STORE_INvar}"=\"'\$( '$@' 2>&1 ; printf %s x ; )'\"
+	printf %s -v "${STORE_INvar}" "${!STORE_INvar%x}"
+}
+
+asDirect ()
+{
+    local VARIABLEptr="${1}" ; shift
+	printf -v "${VARIABLEptr}" %s "$( "$@" ; )"
+}
+
 as ()
 {
     local VARIABLEptr="${1}" ; shift
-	printf -v "${VARIABLEptr}" %s "$( "$@" ; printf %s x ; )"
+	printf -v "${VARIABLEptr}" %s "$( echo \""$@"\" ; printf %s x ; )"
+    printf -v "${VARIABLEptr}" %s "${!VARIABLEptr%x}"
+}
+
+asif ()
+{
+    local VARIABLEptr="${1}" ; shift
+	printf -v "${VARIABLEptr}" %s "$( cat - ; printf %s x ; )"
     printf -v "${VARIABLEptr}" %s "${!VARIABLEptr%x}"
 }
 
@@ -88,12 +129,12 @@ into ()
 
 # var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
 	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
-	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
+	eval "${STORE_INvar}='$( "$@" 2>&1 )'"
 	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
 #	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
 	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
 	#eval "${STORE_INvar}"='\$\( cat \)'
-	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
+#	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
 	# eval "$var='$val'"
 	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
 }
@@ -102,58 +143,6 @@ storeIn ()
 {
     local STORE_INvar="${1}" ; shift
 	eval ${STORE_INvar}="$( "$@" 2>&1 )"
-}
-
-filter ()
-{
-	grep -v "$@" ;
-}
-
-count ()
-{
-    case "${1}" in
-        lines )
-			wc -l
-			;;
-        words )
-            wc -w
-			;;
-        characters | chars | bytes )
-			wc -c
-            ;;
-        * )
-			echoError "Unknown Option: $@" >2
-			;;
-	esac | awk '{print $1}'
-}
-
-wrap ()
-{
-	column -c ${COLUMNS} | more ;
-}
-
-# Bash Primitive Variable Tests
-testVariable ()
-{
-    # Test that a refrance IS a variable (not type specific, i.e. may be an array)
-    declare -p "${1}" > /dev/null 2>&1 ;
-}
-
-# Bash Primitive Array Tests
-testArray ()
-{
-    # Test that a refrance IS an array	    
-    testVariableArray "${1}"
-}
-
-testVariableArray ()
-{
-	# Test that a refrance IS an array
-	local TO_TESTstr="${1}" ; shift
-	set -- $( declare -p "${TO_TESTstr}" 2> /dev/null )
-	# Declare output we are matching looks like:
-	# declare -a ARR='([0]="a" [1]="b" [2]="c")'
-	[[ "${2}" == -*a* ]] ;
 }
 
 into ()
@@ -167,12 +156,12 @@ into ()
 
 # var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
 	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
-	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
+	eval "${STORE_INvar}='$( "$@" 2>&1 )'"
 	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
 #	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
 	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
 	#eval "${STORE_INvar}"='\$\( cat \)'
-	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
+#	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
 	# eval "$var='$val'"
 	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
 }
@@ -180,7 +169,7 @@ into ()
 storeIn ()
 {
     local STORE_INvar="${1}" ; shift
-	eval ${STORE_INvar}="$( "$@" 2>&1 )"
+	printf -v "${STORE_INvar}" '%q' "$( eval '$@' 2>&1 )"
 }
 
 filter ()
@@ -216,92 +205,6 @@ testVariable ()
 {
     # Test that a refrance IS a variable (not type specific, i.e. may be an array)
     declare -p "${1}" > /dev/null 2>&1 ;
-}
-
-# Bash Primitive Array Tests
-testArray ()
-{
-    # Test that a refrance IS an array	    
-    testVariableArray "${1}"
-}
-
-testVariableArray ()
-{
-	# Test that a refrance IS an array
-	local TO_TESTstr="${1}" ; shift
-	set -- $( declare -p "${TO_TESTstr}" 2> /dev/null )
-	# Declare output we are matching looks like:
-	# declare -a ARR='([0]="a" [1]="b" [2]="c")'
-	[[ "${2}" == -*a* ]] ;
-}
-
-into ()
-{
-    local STORE_INvar="${1}" ; shift
-    # local BUFFERstr=$( cat ; echo -n x )
-    # BUFFERstr=${BUFFERstr%x}
-#	myVar=$(cat; echo -n x)
-#	myVar=${myVar%x}
-#	printf %s "$myVar"
-
-# var=$(echo -n $'\n'; echo -n x); var="${var%x}"; echo -n "$var" # $var == "\n"
-	#eval ${STORE_INvar}=\""$( "$@" 2>&1 )"\"
-	#eval "${STORE_INvar}='$( "$@" 2>&1 )'"
-	#eval "${STORE_INvar}"=\""$( eval \""$@"\" 2>&1 )"\"
-#	eval "${STORE_INvar}"=\"'$( 'cat -' 2>&1 )'\"
-	#eval "${STORE_INvar}"=\"'$( cat - 2>&1 )'\"
-	#eval "${STORE_INvar}"='\$\( cat \)'
-	eval "${STORE_INvar}"=\"'\$\( cat \)'\"
-	# eval "$var='$val'"
-	echoDebug "Just Executed: '${STORE_INvar}=\$( cat - )'"
-}
-
-storeIn ()
-{
-    local STORE_INvar="${1}" ; shift
-	eval ${STORE_INvar}="$( "$@" 2>&1 )"
-}
-
-filter ()
-{
-	grep -v "$@" ;
-}
-
-count ()
-{
-    case "${1}" in
-        lines )
-			wc -l
-			;;
-        words )
-            wc -w
-			;;
-        characters | chars | bytes )
-			wc -c
-            ;;
-        * )
-			echoError "Unknown Option: $@" >2
-			;;
-	esac | awk '{print $1}'
-}
-
-wrap ()
-{
-	column -c ${COLUMNS} | more ;
-}
-
-# Bash Primitive Variable Tests
-testVariable ()
-{
-    # Test that a refrance IS a variable (not type specific, i.e. may be an array)
-    declare -p "${1}" > /dev/null 2>&1 ;
-}
-
-# Bash Primitive Array Tests
-testArray ()
-{
-    # Test that a refrance IS an array	    
-    testVariableArray "${1}"
 }
 
 testVariableArray ()
@@ -353,6 +256,13 @@ testVariableUsed ()
     # - ${VAR:+string}, VAR set, not null = string, VAR set but null = string, VAR unset = null
     # - 'test -n' True if the length of string is nonzero.  i.e. there is any value
     [ -n "${!1:+iAmSet}" ] || testArray "${1}" ;
+}
+
+# Bash Primitive Array Tests
+testArray ()
+{
+    # Test that a refrance IS an array	    
+    testVariableArray "${1}"
 }
 
 echoDebug ()
